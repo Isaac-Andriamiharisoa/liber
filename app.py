@@ -1,11 +1,12 @@
 from models import app, Ame
 from flask import render_template, request, jsonify
+import os
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
 @app.route('/')
 def login():
-    return "Under maintenance"
+    return render_template('login.html')
 
 @app.route('/ames')
 def get_ames():
@@ -74,4 +75,5 @@ def delete(id):
     })
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host = os.getenv('IP', '0.0.0.0'),
+    port = int(os.getenv('PORT', 4444)))

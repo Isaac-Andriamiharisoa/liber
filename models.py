@@ -14,6 +14,11 @@ class Ame(db.Model):
     nom = db.Column(db.String)
     prenom = db.Column(db.String)
     bapteme = db.Column(db.Boolean)
+    communion = db.Column(db.Boolean)
+    fanavaozana = db.Column(db.Boolean)
+    confirmation = db.Column(db.Boolean)
+    mariage = db.Column(db.Boolean)
+    mort = db.Column(db.Boolean)
 
     def __init__(self, nom, prenom, bapteme):
         self.nom = nom

@@ -1,0 +1,25 @@
+:root {
+    --bg : #e5ddc8;
+    --teal : #01949a;
+    --navy : #004369;
+    --red : #db1f48;
+}
+* {
+    box-sizing: border-box;
+    margin : 0;
+    padding: 0;
+}
+html{
+    width: 100%;
+}
+
+body{
+}
+.container {
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #004369;
+}
