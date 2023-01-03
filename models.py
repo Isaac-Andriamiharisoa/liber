@@ -13,6 +13,7 @@ class Ame(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String)
     prenom = db.Column(db.String)
+    password = db.Column(db.String)
     bapteme = db.Column(db.Boolean)
     communion = db.Column(db.Boolean)
     fanavaozana = db.Column(db.Boolean)
