@@ -13,18 +13,18 @@ class Ame(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String)
     prenom = db.Column(db.String)
-    password = db.Column(db.String)
     bapteme = db.Column(db.Boolean)
+    motdepasse = db.Column(db.String)
     communion = db.Column(db.Boolean)
     fanavaozana = db.Column(db.Boolean)
     confirmation = db.Column(db.Boolean)
     mariage = db.Column(db.Boolean)
     mort = db.Column(db.Boolean)
 
-    def __init__(self, nom, prenom, bapteme):
-        self.nom = nom
-        self.prenom = prenom
-        self.bapteme = bapteme
+    # def __init__(self, nom, prenom, bapteme):
+    #     self.nom = nom
+    #     self.prenom = prenom
+    #     self.bapteme = bapteme
 
     def insert(self):
         db.session.add(self)

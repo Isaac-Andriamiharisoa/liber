@@ -1,15 +1,32 @@
-{% extends 'layouts/body.html' %}
-{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
 <div class="container">
-    <form action="{{url_for('get_ames')}}" method="get" class="form">
-        <h1 class="title">
-            Liber
-        </h1>
-        <label for="nom">Nom</label>
-        <input type="text" name="nom">
-        <label for="mdp">Mot de passe</label>
-        <input type="text" name="mdp">
-        <button type="submit">Se connecter</button>
-    </form>
+    <div class="image_container login_pg">
+        <img src="{{url_for('static', filename='images/jesus_pic_2.png')}}" alt="">
+        <p>"Trust in the Lord with all your heart and lean not on your own understanding." - Proverbs 3:5</p>
+    </div>
+    <div class="form_container login_pg">
+        <form action="{{url_for('get_ames')}}" method="get" class="form">
+            <div class="title_container form_subcontainer">
+                <h1 class="title">Liber Status</h1>
+            </div>
+            <div class="input_container form_subcontainer">
+                <label for="nom">Nom</label>
+                <input type="text" name="nom">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" name="mdp">
+                <div class="btn_container">
+                    <button type="submit">Se connecter</button>
+                    <a href="{{url_for('sign_up')}}">Sign up</a>
+                </div>
+            </div>
+            <div class="social_container form_subcontainer">
+                <h5 style="text-decoration: underline;">Contacts</h5>
+                <ul>
+                    <li>+230 5497 7668</li>
+                    <li>+230 5497 7668</li>
+                    <li>+230 5497 7668</li>
+                </ul>
+            </div>
+        </form>
+    </div>
 </div>
-{% endblock %}
