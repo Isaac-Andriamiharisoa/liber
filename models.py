@@ -20,11 +20,7 @@ class Ame(db.Model):
     confirmation = db.Column(db.Boolean)
     mariage = db.Column(db.Boolean)
     mort = db.Column(db.Boolean)
-
-    # def __init__(self, nom, prenom, bapteme):
-    #     self.nom = nom
-    #     self.prenom = prenom
-    #     self.bapteme = bapteme
+    contribution = db.Column(db.Integer, default=0)
 
     def insert(self):
         db.session.add(self)

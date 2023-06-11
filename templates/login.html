@@ -5,18 +5,18 @@
         <p>"Trust in the Lord with all your heart and lean not on your own understanding." - Proverbs 3:5</p>
     </div>
     <div class="form_container login_pg">
-        <form action="{{url_for('get_ames')}}" method="get" class="form">
+        <form action="{{url_for('post_login')}}" method="post" class="login_form">
             <div class="title_container form_subcontainer">
                 <h1 class="title">Liber Status</h1>
             </div>
             <div class="input_container form_subcontainer">
                 <label for="nom">Nom</label>
                 <input type="text" name="nom">
-                <label for="mdp">Mot de passe</label>
-                <input type="password" name="mdp">
+                <label for="motdepasse">Mot de passe</label>
+                <input type="password" name="motdepasse">
                 <div class="btn_container">
                     <button type="submit">Se connecter</button>
-                    <a href="{{url_for('sign_up')}}">Sign up</a>
+                    <a href="{{url_for('create_ame')}}">Sign up</a>
                 </div>
             </div>
             <div class="social_container form_subcontainer">

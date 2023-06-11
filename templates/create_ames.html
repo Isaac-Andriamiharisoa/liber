@@ -1,23 +1,50 @@
-<form action="/ames/create" method="post">
-    <label for="nom">Nom</label>
-    <input type="text" name="nom">
-    <label for="prenom">Prenom</label>
-    <input type="text" name="prenom">
-    <label for="motdepasse">Mot de passe</label>
-    <input type="text" name="motdepasse" id="">
-    <div class="sakramenta">
-        <label for="batemy">batemy</label>
-        <input type="checkbox" name="batemy">
-        <label for="komonio">Komonio</label>
-        <input type="checkbox" name="komonio">
-        <label for="fankaherezana">Fankaherezana</label>
-        <input type="checkbox" name="fankaherezana">
-        <label for="confirmation">Confirmation</label>
-        <input type="checkbox" name="confirmation">
-        <label for="mariazy">Mariazy</label>
-        <input type="checkbox" name="mariazy">
-        <label for="maty">Maty</label>
-        <input type="checkbox" name="maty">
-    </div>
-    <button type="submit">Submit</button>
-</form>
+<link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
+<div class="form_container create_container">
+    <form action="/ames/create" method="post" class="create_form">
+        <div class="title_container form_subcontainer">
+            <h1 class="title">Liber Status</h1>
+        </div>
+        <div class="input_container form_subcontainer" id="input_container">
+            <label for="nom">Nom*</label>
+            <input type="text" name="nom" required>
+            <label for="prenom">Prenom*</label>
+            <input type="text" name="prenom" required>
+            <label for="motdepasse">Mot de passe*</label>
+            <input type="password" name="motdepasse" id="" required>
+        </div>
+        <div class="checkbox_container" id="checkbox_container">
+            <label for="batemy">batemy</label>
+            <input type="checkbox" name="batemy">
+            <label for="komonio">Komonio</label>
+            <input type="checkbox" name="komonio">
+            <label for="fankaherezana">Fankaherezana</label>
+            <input type="checkbox" name="fankaherezana">
+            <label for="confirmation">Confirmation</label>
+            <input type="checkbox" name="confirmation">
+            <label for="mariazy">Mariazy</label>
+            <input type="checkbox" name="mariazy">
+            <label for="maty">Maty</label>
+            <input type="checkbox" name="maty">
+        </div>
+        <div class="btn_container">
+            <button type="submit">Submit</button>
+            <a href="{{url_for('get_login')}}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    const input_container = document.getElementById('input_container')
+    const checkbox_container = document.getElementById('checkbox_container')
+    const button = document.getElementById('toggle_button')
+    button.addEventListener('click', function () {
+        if (checkbox_container.classList.contains('hide')) {
+            input_container.classList.add('hide')
+            checkbox_container.classList.remove('hide')
+        }
+        else {
+            checkbox_container.classList.add('hide')
+            input_container.classList.remove('hide')
+        }
+    });
+</script>

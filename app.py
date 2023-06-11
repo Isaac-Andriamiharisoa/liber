@@ -1,13 +1,41 @@
 from models import app, Ame
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect, url_for, session
 import os
+import bcrypt
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'MofoAkondro69420!!'
 
 
-@app.route('/')
-def login():
+@app.route('/', methods=['GET'])
+def get_login():
     return render_template('login.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def post_login():
+    if request.method != 'POST':
+        return render_template('login.html')
+    else:
+        nom = request.form.get('nom')
+        motdepasse = request.form.get('motdepasse')
+        ame = Ame.query.filter_by(nom=nom, motdepasse=motdepasse).first()
+
+        if ame is None:
+            return jsonify({
+                'message': 'credential mismatch',
+                'error_code': 403
+            })
+        else:
+            id = ame.id
+            session['user_id'] = id
+            return redirect(url_for('get_ame_details', id=id))
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('get_login'))
 
 
 @app.route('/sign_up')
@@ -30,24 +58,31 @@ def get_ames():
 @app.route('/ames/<id>')
 def get_ame_details(id):
     data = Ame.query.get(id)
-    return jsonify({
-        'nom': data.nom,
-        'prenom': data.prenom,
-        'bapteme': data.bapteme
-    })
+    user_id = session.get('user_id')
+
+    if user_id:
+        if user_id == data.id:
+            return render_template('ame.html', data=data, user_id=user_id)
+        else:
+            return jsonify({
+                'message': 'restricted page',
+                'error_code': 403
+            })
+    else:
+        return redirect(url_for('get_login'))
 
 
 @app.route('/ames/create', methods=['GET'])
-def get_page():
+def create_ame():
     return render_template('create_ames.html')
 
 
 @app.route('/ames/create', methods=['POST'])
-def create():
+def creating():
 
     data = request.form.to_dict()
 
-    if not data:
+    if data is None:
         return jsonify({'error': 'Invalid data'}), 400
 
     nom = data.get('nom')
@@ -74,21 +109,13 @@ def create():
             'mort': mort
         }), 400
 
-    ame = Ame(nom=nom, prenom=prenom, bapteme=batemy, communion=communion, fanavaozana=fanavaozana, confirmation=confirmation, mariage=mariage, mort=mort)
+    ame = Ame(nom=nom, prenom=prenom, motdepasse=motdepasse, bapteme=batemy, communion=communion,
+              fanavaozana=fanavaozana, confirmation=confirmation, mariage=mariage, mort=mort)
     ame.insert()
+    id = ame.id
+    session['user_id'] = id
 
-    return jsonify({
-        'success': True,
-        'nom': nom,
-        'prenom': prenom,
-        'motdepasse': motdepasse,
-        'batemy': batemy,
-        'communion': communion,
-        'fanavaozana': fanavaozana,
-        'confirmation': confirmation,
-        'mariage': mariage,
-        'mort': mort
-    })
+    return redirect(url_for('get_ame_details', id=id))
 
 
 @app.route('/ames/<id>/update', methods=['GET'], endpoint='update')
