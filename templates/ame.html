@@ -1,5 +1,7 @@
+{% include 'layouts/import.html' %}
 {%include 'layouts/navbar.html'%}
-<h4>{{ data.nom }}</h4>
-<h4>{{ data.prenom }}</h4>
-<h4>{{ data.bapteme }}</h4>
-<h2>{{ user_id }}</h2>
+<div class="container info_container">
+    <div class="title_container">
+        <h1>Hello, {{data.nom}}</h1>
+    </div>
+</div>
